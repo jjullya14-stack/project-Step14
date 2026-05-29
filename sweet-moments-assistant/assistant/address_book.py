@@ -45,3 +45,41 @@ class AddressBook(UserDict):
                 })
 
         return upcoming_birthdays
+    
+    def search_contacts(self, keyword):
+        result = []
+
+    def search_contacts(self, keyword):
+        result = []
+
+        for record in self.data.values():
+            if keyword.lower() in record.name.value.lower():
+                result.append(str(record))
+
+        return result
+
+
+    def search_notes(self, keyword):
+        result = []
+
+        for record in self.data.values():
+            for note in record.notes:
+                if keyword.lower() in note.value.lower():
+                    result.append(str(record))
+                    break
+
+    def search_tags(self, keyword):
+        result = []
+
+        for record in self.data.values():
+            if not hasattr(record, "tags"):
+                continue
+
+            for tag in record.tags:
+                if keyword.lower() in tag.value.lower():
+                    result.append(str(record))
+                    break
+
+        return result           
+
+        

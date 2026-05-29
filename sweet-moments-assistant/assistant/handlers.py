@@ -8,14 +8,13 @@ def input_error(func):
         except ValueError as error:
             return str(error)
         except KeyError as error:
-            return str(error)
+            return error.args[0]
         except IndexError:
             return "Not enough arguments."
         except TypeError:
             return "Invalid command format."
 
     return inner
-
 
 def parse_input(user_input):
     if not user_input.strip():
@@ -218,3 +217,63 @@ def show_notes(args, book):
         raise KeyError("Contact not found.")
 
     return record.show_notes()
+
+@input_error
+def add_tag(args, book):
+    name, *tag_parts = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    if not tag_parts:
+        raise ValueError("Tag cannot be empty.")
+
+    tag = " ".join(tag_parts)
+
+    record.add_tag(tag)
+    return "Tag added."
+
+
+@input_error
+def show_tags(args, book):
+    name, *_ = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    return record.show_tags()
+
+@input_error
+def find_contact(args, book):
+    keyword, *_ = args
+
+    result = book.search_contacts(keyword)
+
+    if not result:
+        return "No contacts found."
+
+    return "\n".join(result)
+
+@input_error
+def find_note(args, book):
+    keyword, *_ = args
+
+    result = book.search_notes(keyword)
+
+    if not result:
+        return "No notes found."
+
+    return "\n".join(result)
+
+@input_error
+def find_tag(args, book):
+    keyword, *_ = args
+
+    result = book.search_tags(keyword)
+
+    if not result:
+        return "No tags found."
+
+    return "\n".join(result)

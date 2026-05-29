@@ -1,3 +1,4 @@
+from assistant.ui import show_main_menu, show_help
 from assistant.storage import load_data, save_data
 from assistant.handlers import (
     parse_input,
@@ -16,12 +17,17 @@ from assistant.handlers import (
     show_occasions,
     add_note,
     show_notes,
+    add_tag,
+    show_tags,
+    find_contact,
+    find_note,
+    find_tag,
 )
 
 
 def main():
     book = load_data()
-    print("Welcome to the assistant bot!")
+    show_main_menu()
 
     while True:
         user_input = input("Enter a command: ")
@@ -83,11 +89,29 @@ def main():
             print(add_note(args, book))
 
         elif command == "show-notes":
-            print(show_notes(args, book))    
+            print(show_notes(args, book))  
+
+        elif command == "add-tag":
+            print(add_tag(args, book))
+            save_data(book)
+
+        elif command == "show-tags":
+            print(show_tags(args, book))   
+
+        elif command == "find-contact":
+            print(find_contact(args, book))
+
+        elif command == "find-note":
+            print(find_note(args, book))
+
+        elif command == "find-tag":
+            print(find_tag(args, book)) 
+
+        elif command == "help":
+            show_help()
 
         else:
             print("Invalid command.")
-
 
 if __name__ == "__main__":
     main()

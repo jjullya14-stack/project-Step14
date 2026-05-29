@@ -56,6 +56,9 @@ class Occasion(Field):
 class Note(Field):
     pass
 
+class Tag(Field):
+    pass
+
 class Record:
     def __init__(self, name):
         self.name = Name(name)
@@ -65,6 +68,8 @@ class Record:
         self.birthday = None
         self.occasions = []
         self.notes = []
+        self.notes = []
+        self.tags = []
 
     def add_phone(self, phone):
         self.phones.append(Phone(phone))
@@ -129,6 +134,21 @@ class Record:
             return "No notes added."
 
         return "; ".join(note.value for note in self.notes)
+    
+    def add_tag(self, tag):
+        if not hasattr(self, "tags"):
+            self.tags = []
+
+        self.tags.append(Tag(tag))
+
+    def show_tags(self):
+        if not hasattr(self, "tags"):
+            self.tags = []
+
+        if not self.tags:
+            return "No tags added."
+
+        return ", ".join(tag.value for tag in self.tags)
 
 
     def __str__(self):
@@ -145,6 +165,7 @@ class Record:
 
         occasions = self.show_occasions()
         notes = self.show_notes()
+        tags = self.show_tags()
 
         return (
             f"Contact name: {self.name.value}, "
@@ -153,8 +174,9 @@ class Record:
             f"address: {address}, "
             f"birthday: {birthday}, "
             f"occasions: {occasions},"
-            f"notes: {notes}"
+            f"notes: {notes},"
+            f"tags: {tags}"
 )
     
-    
+
     
