@@ -166,3 +166,30 @@ def show_address(args, book):
         return "Address not added."
 
     return f"{name}'s address: {record.address.value}"
+
+@input_error
+def add_occasion(args, book):
+    name, *occasion_parts = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    if not occasion_parts:
+        raise ValueError("Occasion cannot be empty.")
+
+    occasion = " ".join(occasion_parts)
+
+    record.add_occasion(occasion)
+    return "Occasion added."
+
+
+@input_error
+def show_occasions(args, book):
+    name, *_ = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    return record.show_occasions()

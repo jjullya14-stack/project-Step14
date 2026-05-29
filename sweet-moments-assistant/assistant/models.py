@@ -49,7 +49,9 @@ class Birthday(Field):
             super().__init__(birthday_date)
         except ValueError:
             raise ValueError("Invalid date format. Use DD.MM.YYYY")
-
+        
+class Occasion(Field):
+    pass
 
 class Record:
     def __init__(self, name):
@@ -58,6 +60,7 @@ class Record:
         self.email = None
         self.address = None
         self.birthday = None
+        self.occasions = []
 
     def add_phone(self, phone):
         self.phones.append(Phone(phone))
@@ -93,21 +96,44 @@ class Record:
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
 
+    def add_occasion(self, occasion):
+        if not hasattr(self, "occasions"):
+            self.occasions = []
+
+        self.occasions.append(Occasion(occasion))
+
+    def show_occasions(self):
+        if not hasattr(self, "occasions"):
+            self.occasions = []
+
+        if not self.occasions:
+            return "No occasions added."
+
+        return ", ".join(occasion.value for occasion in self.occasions)    
+
+    
     def __str__(self):
         phones = "; ".join(p.value for p in self.phones)
 
         email = self.email.value if self.email else "not added"
         address = self.address.value if self.address else "not added"
+        occasions = self.show_occasions()
 
         if self.birthday:
             birthday = self.birthday.value.strftime("%d.%m.%Y")
         else:
             birthday = "not added"
 
+        occasions = self.show_occasions()
+
         return (
             f"Contact name: {self.name.value}, "
             f"phones: {phones}, "
             f"email: {email}, "
             f"address: {address}, "
-            f"birthday: {birthday}"
-        )
+            f"birthday: {birthday}, "
+            f"occasions: {occasions}"
+)
+    
+    
+    

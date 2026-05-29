@@ -12,6 +12,8 @@ from assistant.handlers import (
     show_email,
     add_address,
     show_address,
+    add_occasion,
+    show_occasions,
 )
 
 
@@ -62,7 +64,13 @@ def main():
             print(add_address(args, book))
 
         elif command == "show-address":
-            print(show_address(args, book))   
+            print(show_address(args, book))
+
+        elif command == "add-occasion":
+            print(add_occasion(args, book))
+
+        elif command == "show-occasions":
+            print(show_occasions(args, book))
 
         else:
             print("Invalid command.")
@@ -70,3 +78,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
