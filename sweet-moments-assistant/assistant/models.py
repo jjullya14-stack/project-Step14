@@ -24,6 +24,17 @@ class Phone(Field):
         return value.isdigit() and len(value) == 10
 
 
+class Email(Field):
+    def __init__(self, value):
+        if not self.is_valid_email(value):
+            raise ValueError("Invalid email format.")
+        super().__init__(value)
+
+    @staticmethod
+    def is_valid_email(value):
+        return "@" in value and "." in value
+
+
 class Birthday(Field):
     def __init__(self, value):
         try:
@@ -37,6 +48,7 @@ class Record:
     def __init__(self, name):
         self.name = Name(name)
         self.phones = []
+        self.email = None
         self.birthday = None
 
     def add_phone(self, phone):
@@ -64,15 +76,28 @@ class Record:
                 return item
         return None
 
+    def add_email(self, email):
+        self.email = Email(email)
+
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
 
     def __str__(self):
         phones = "; ".join(p.value for p in self.phones)
 
+        if self.email:
+            email = self.email.value
+        else:
+            email = "not added"
+
         if self.birthday:
             birthday = self.birthday.value.strftime("%d.%m.%Y")
         else:
             birthday = "not added"
 
-        return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday}"
+        return (
+            f"Contact name: {self.name.value}, "
+            f"phones: {phones}, "
+            f"email: {email}, "
+            f"birthday: {birthday}"
+        )
