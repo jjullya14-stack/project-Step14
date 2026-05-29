@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 class Field:
     def __init__(self, value):
         self.value = value
@@ -16,12 +15,16 @@ class Name(Field):
 class Phone(Field):
     def __init__(self, value):
         if not self.is_valid_phone(value):
-            raise ValueError("Phone number must contain exactly 10 digits.")
+            raise ValueError("Phone must start with + and contain 10-15 digits.")
         super().__init__(value)
 
     @staticmethod
     def is_valid_phone(value):
-        return value.isdigit() and len(value) == 10
+        if not value.startswith("+"):
+            return False
+
+        digits = value[1:]
+        return digits.isdigit() and 10 <= len(digits) <= 15
 
 
 class Email(Field):
@@ -33,6 +36,10 @@ class Email(Field):
     @staticmethod
     def is_valid_email(value):
         return "@" in value and "." in value
+
+
+class Address(Field):
+    pass
 
 
 class Birthday(Field):
@@ -49,6 +56,7 @@ class Record:
         self.name = Name(name)
         self.phones = []
         self.email = None
+        self.address = None
         self.birthday = None
 
     def add_phone(self, phone):
@@ -79,16 +87,17 @@ class Record:
     def add_email(self, email):
         self.email = Email(email)
 
+    def add_address(self, address):
+        self.address = Address(address)
+
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
 
     def __str__(self):
         phones = "; ".join(p.value for p in self.phones)
 
-        if self.email:
-            email = self.email.value
-        else:
-            email = "not added"
+        email = self.email.value if self.email else "not added"
+        address = self.address.value if self.address else "not added"
 
         if self.birthday:
             birthday = self.birthday.value.strftime("%d.%m.%Y")
@@ -99,5 +108,6 @@ class Record:
             f"Contact name: {self.name.value}, "
             f"phones: {phones}, "
             f"email: {email}, "
+            f"address: {address}, "
             f"birthday: {birthday}"
         )

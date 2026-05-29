@@ -8,6 +8,10 @@ from assistant.handlers import (
     add_birthday,
     show_birthday,
     birthdays,
+    add_email,
+    show_email,
+    add_address,
+    show_address,
 )
 
 
@@ -47,6 +51,18 @@ def main():
 
         elif command == "birthdays":
             print(birthdays(args, book))
+
+        elif command == "add-email":
+            print(add_email(args, book))
+
+        elif command == "show-email":
+            print(show_email(args, book))
+
+        elif command == "add-address":
+            print(add_address(args, book))
+
+        elif command == "show-address":
+            print(show_address(args, book))   
 
         else:
             print("Invalid command.")

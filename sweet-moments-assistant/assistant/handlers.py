@@ -111,3 +111,58 @@ def birthdays(args, book):
         f"{item['name']}: {item['congratulation_date']}"
         for item in upcoming_birthdays
     )
+
+@input_error
+def add_email(args, book):
+    name, email, *_ = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    record.add_email(email)
+    return "Email added."
+
+
+@input_error
+def show_email(args, book):
+    name, *_ = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    if record.email is None:
+        return "Email not added."
+
+    return f"{name}'s email: {record.email.value}"
+
+
+@input_error
+def add_address(args, book):
+    name, *address_parts = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    if not address_parts:
+        raise ValueError("Address cannot be empty.")
+
+    address = " ".join(address_parts)
+    record.add_address(address)
+    return "Address added."
+
+
+@input_error
+def show_address(args, book):
+    name, *_ = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    if record.address is None:
+        return "Address not added."
+
+    return f"{name}'s address: {record.address.value}"
