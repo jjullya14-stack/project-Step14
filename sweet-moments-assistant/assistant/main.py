@@ -14,6 +14,8 @@ from assistant.handlers import (
     show_address,
     add_occasion,
     show_occasions,
+    add_note,
+    show_notes,
 )
 
 
@@ -35,19 +37,22 @@ def main():
 
         elif command == "add":
             print(add_contact(args, book))
+            save_data(book)
 
         elif command == "change":
             print(change_contact(args, book))
+            
 
         elif command == "phone":
             print(show_phone(args, book))
-
+            
         elif command == "all":
             print(show_all(book))
+            save_data(book)
 
         elif command == "add-birthday":
             print(add_birthday(args, book))
-
+            
         elif command == "show-birthday":
             print(show_birthday(args, book))
 
@@ -62,15 +67,23 @@ def main():
 
         elif command == "add-address":
             print(add_address(args, book))
+            save_data(book)
 
         elif command == "show-address":
             print(show_address(args, book))
 
         elif command == "add-occasion":
             print(add_occasion(args, book))
+            save_data(book)
 
         elif command == "show-occasions":
             print(show_occasions(args, book))
+
+        elif command == "add-note":
+            print(add_note(args, book))
+
+        elif command == "show-notes":
+            print(show_notes(args, book))    
 
         else:
             print("Invalid command.")
@@ -78,4 +91,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

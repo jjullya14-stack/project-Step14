@@ -183,7 +183,6 @@ def add_occasion(args, book):
     record.add_occasion(occasion)
     return "Occasion added."
 
-
 @input_error
 def show_occasions(args, book):
     name, *_ = args
@@ -193,3 +192,29 @@ def show_occasions(args, book):
         raise KeyError("Contact not found.")
 
     return record.show_occasions()
+
+@input_error
+def add_note(args, book):
+    name, *note_parts = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    if not note_parts:
+        raise ValueError("Note cannot be empty.")
+
+    note = " ".join(note_parts)
+    record.add_note(note)
+    return "Note added."
+
+
+@input_error
+def show_notes(args, book):
+    name, *_ = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    return record.show_notes()

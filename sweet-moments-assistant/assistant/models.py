@@ -53,6 +53,9 @@ class Birthday(Field):
 class Occasion(Field):
     pass
 
+class Note(Field):
+    pass
+
 class Record:
     def __init__(self, name):
         self.name = Name(name)
@@ -61,6 +64,7 @@ class Record:
         self.address = None
         self.birthday = None
         self.occasions = []
+        self.notes = []
 
     def add_phone(self, phone):
         self.phones.append(Phone(phone))
@@ -111,7 +115,22 @@ class Record:
 
         return ", ".join(occasion.value for occasion in self.occasions)    
 
-    
+    def add_note(self, note):
+        if not hasattr(self, "notes"):
+            self.notes = []
+
+        self.notes.append(Note(note))
+
+    def show_notes(self):
+        if not hasattr(self, "notes"):
+            self.notes = []
+
+        if not self.notes:
+            return "No notes added."
+
+        return "; ".join(note.value for note in self.notes)
+
+
     def __str__(self):
         phones = "; ".join(p.value for p in self.phones)
 
@@ -125,6 +144,7 @@ class Record:
             birthday = "not added"
 
         occasions = self.show_occasions()
+        notes = self.show_notes()
 
         return (
             f"Contact name: {self.name.value}, "
@@ -132,7 +152,8 @@ class Record:
             f"email: {email}, "
             f"address: {address}, "
             f"birthday: {birthday}, "
-            f"occasions: {occasions}"
+            f"occasions: {occasions},"
+            f"notes: {notes}"
 )
     
     
