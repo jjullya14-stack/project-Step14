@@ -1,6 +1,7 @@
 from assistant.models import Record
 
 
+# Декоратор для обробки помилок введення користувача
 def input_error(func):
     def inner(*args, **kwargs):
         try:
@@ -16,6 +17,7 @@ def input_error(func):
 
     return inner
 
+# Розбір введеної команди на команду та аргументи
 def parse_input(user_input):
     if not user_input.strip():
         return "", []
@@ -24,6 +26,7 @@ def parse_input(user_input):
     return cmd.strip().lower(), args
 
 
+# Додавання або оновлення контакту
 @input_error
 def add_contact(args, book):
     name, phone, *_ = args
@@ -72,6 +75,7 @@ def show_all(book):
     return "\n".join(str(record) for record in book.data.values())
 
 
+# Команди для роботи з днем народження
 @input_error
 def add_birthday(args, book):
     name, birthday, *_ = args
@@ -111,6 +115,7 @@ def birthdays(args, book):
         for item in upcoming_birthdays
     )
 
+# Команди для роботи з email та адресою
 @input_error
 def add_email(args, book):
     name, email, *_ = args
@@ -166,6 +171,7 @@ def show_address(args, book):
 
     return f"{name}'s address: {record.address.value}"
 
+# Команди для роботи з важливими подіями клієнта
 @input_error
 def add_occasion(args, book):
     name, *occasion_parts = args
@@ -192,6 +198,7 @@ def show_occasions(args, book):
 
     return record.show_occasions()
 
+# Команди для роботи з нотатками
 @input_error
 def add_note(args, book):
     name, *note_parts = args
@@ -218,6 +225,7 @@ def show_notes(args, book):
 
     return record.show_notes()
 
+# Команди для роботи з тегами
 @input_error
 def add_tag(args, book):
     name, *tag_parts = args
@@ -245,6 +253,7 @@ def show_tags(args, book):
 
     return record.show_tags()
 
+# Пошук контактів, нотаток і тегів
 @input_error
 def find_contact(args, book):
     keyword, *_ = args

@@ -1,5 +1,6 @@
 from datetime import datetime
 
+# Базовий клас для всіх полів контакту
 class Field:
     def __init__(self, value):
         self.value = value
@@ -8,10 +9,12 @@ class Field:
         return str(self.value)
 
 
+# Поле імені клієнта
 class Name(Field):
     pass
 
 
+# Поле телефону з перевіркою міжнародного формату
 class Phone(Field):
     def __init__(self, value):
         if not self.is_valid_phone(value):
@@ -27,6 +30,7 @@ class Phone(Field):
         return digits.isdigit() and 10 <= len(digits) <= 15
 
 
+# Поле email з простою перевіркою формату
 class Email(Field):
     def __init__(self, value):
         if not self.is_valid_email(value):
@@ -38,10 +42,12 @@ class Email(Field):
         return "@" in value and "." in value
 
 
+# Поле адреси клієнта
 class Address(Field):
     pass
 
 
+# Поле дня народження з перевіркою формату дати
 class Birthday(Field):
     def __init__(self, value):
         try:
@@ -50,15 +56,19 @@ class Birthday(Field):
         except ValueError:
             raise ValueError("Invalid date format. Use DD.MM.YYYY")
         
+ # Важлива подія клієнта: день народження чоловіка, дитини тощо
 class Occasion(Field):
     pass
 
+# Нотатка про клієнта
 class Note(Field):
     pass
 
+# Тег для швидкої категоризації клієнта
 class Tag(Field):
     pass
 
+# Один запис клієнта в адресній книзі
 class Record:
     def __init__(self, name):
         self.name = Name(name)

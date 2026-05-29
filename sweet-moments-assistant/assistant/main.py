@@ -1,5 +1,8 @@
+# Імпорт функцій інтерфейсу
 from assistant.ui import show_main_menu, show_help
+# Імпорт функцій збереження даних
 from assistant.storage import load_data, save_data
+# Імпорт команд помічника
 from assistant.handlers import (
     parse_input,
     add_contact,
@@ -25,19 +28,23 @@ from assistant.handlers import (
 )
 
 
+# Головна функція запуску помічника
 def main():
     book = load_data()
     show_main_menu()
-
+   
+    # Основний цикл роботи програми
     while True:
         user_input = input("Enter a command: ")
         command, args = parse_input(user_input)
 
+       # Завершення роботи та збереження даних
         if command in ["close", "exit"]:
             print("Good bye!")
             save_data(book)
             break
 
+        # Відображення списку команд
         elif command == "hello":
             print("How can I help you?")
 
@@ -47,18 +54,19 @@ def main():
 
         elif command == "change":
             print(change_contact(args, book))
-            
+            save_data(book)
 
         elif command == "phone":
             print(show_phone(args, book))
             
         elif command == "all":
             print(show_all(book))
-            save_data(book)
+          
 
         elif command == "add-birthday":
             print(add_birthday(args, book))
-            
+            save_data(book)
+
         elif command == "show-birthday":
             print(show_birthday(args, book))
 
@@ -67,7 +75,8 @@ def main():
 
         elif command == "add-email":
             print(add_email(args, book))
-
+            save_data(book)
+            
         elif command == "show-email":
             print(show_email(args, book))
 
@@ -87,6 +96,7 @@ def main():
 
         elif command == "add-note":
             print(add_note(args, book))
+            save_data(book)
 
         elif command == "show-notes":
             print(show_notes(args, book))  
@@ -112,6 +122,8 @@ def main():
 
         else:
             print("Invalid command.")
+
+
 
 if __name__ == "__main__":
     main()
