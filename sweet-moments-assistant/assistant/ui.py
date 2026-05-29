@@ -1,18 +1,23 @@
+from colorama import Fore, init
+
+init(autoreset=True)
+
+
 def print_box(title, lines=None):
     if lines is None:
         lines = []
 
     width = 60
 
-    print("╔" + "═" * width + "╗")
-    print(f"║ {title:<58} ║")
+    print(Fore.CYAN + "╔" + "═" * width + "╗")
+    print(Fore.YELLOW + f"║ {title:<58} ║")
 
     if lines:
-        print("╠" + "═" * width + "╣")
+        print(Fore.CYAN + "╠" + "═" * width + "╣")
         for line in lines:
-            print(f"║ {line:<58} ║")
+            print(Fore.WHITE + f"║ {line:<58} ║")
 
-    print("╚" + "═" * width + "╝")
+    print(Fore.CYAN + "╚" + "═" * width + "╝")
 
 
 def show_main_menu():
