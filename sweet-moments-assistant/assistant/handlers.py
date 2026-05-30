@@ -294,3 +294,53 @@ def delete_contact(args, book):
     book.delete(name)
 
     return "Contact deleted."
+
+@input_error
+def edit_note(args, book):
+    name, old_text, *new_text_parts = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    if not new_text_parts:
+        raise ValueError("New note cannot be empty.")
+
+    new_text = " ".join(new_text_parts)
+    record.edit_note(old_text, new_text)
+
+    return "Note edited."
+
+
+@input_error
+def delete_note(args, book):
+    name, *note_parts = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    if not note_parts:
+        raise ValueError("Note cannot be empty.")
+
+    note = " ".join(note_parts)
+    record.delete_note(note)
+
+    return "Note deleted."
+
+
+@input_error
+def delete_tag(args, book):
+    name, *tag_parts = args
+    record = book.find(name)
+
+    if record is None:
+        raise KeyError("Contact not found.")
+
+    if not tag_parts:
+        raise ValueError("Tag cannot be empty.")
+
+    tag = " ".join(tag_parts)
+    record.delete_tag(tag)
+
+    return "Tag deleted."

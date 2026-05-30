@@ -3,6 +3,7 @@ from colorama import Fore, init
 # Ініціалізація кольорового виводу в терміналі
 init(autoreset=True)
 
+
 # Створення красивої рамки для CLI
 def print_box(title, lines=None):
     if lines is None:
@@ -20,6 +21,7 @@ def print_box(title, lines=None):
 
     print(Fore.CYAN + "╚" + "═" * width + "╝")
 
+
 # Головне меню застосунку
 def show_main_menu():
     print_box(
@@ -27,18 +29,22 @@ def show_main_menu():
         [
             "help - show all commands",
             "add - add new client",
+            "delete - delete client",
             "all - show all clients",
             "birthdays - upcoming birthdays",
             "add-note - add client note",
+            "edit-note - edit client note",
+            "delete-note - delete client note",
             "add-tag - add client tag",
+            "delete-tag - delete client tag",
             "add-occasion - add family event",
             "find-contact - search client",
             "find-note - search note",
             "find-tag - search tag",
             "exit - save and close",
-            "delete - delete client",
-        ]
+        ],
     )
+
 
 # Відображення доступних команд
 def show_help():
@@ -50,17 +56,20 @@ def show_help():
             "add-address [name] [address]",
             "add-birthday [name] [DD.MM.YYYY]",
             "add-note [name] [text]",
+            "edit-note [name] [old_text] [new_text]",
+            "delete-note [name] [text]",
             "add-tag [name] [tag]",
+            "delete-tag [name] [tag]",
             "find-contact [text]",
             "find-note [text]",
             "find-tag [tag]",
-            "all",
-            "exit / close",
             "add-occasion [name] [event]",
             "show-occasions [name]",
-            "birthdays",
-            "help",
             "delete [name]",
-        ]
+            "birthdays",
+            "all",
+            "help",
+            "exit / close",
+        ],
     )
     

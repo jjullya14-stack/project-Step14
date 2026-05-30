@@ -26,6 +26,9 @@ from assistant.handlers import (
     find_note,
     find_tag,
     delete_contact,
+    edit_note,
+    delete_note,
+    delete_tag,
 )
 
 
@@ -124,6 +127,18 @@ def main():
         elif command == "delete":
              print(delete_contact(args, book))
              save_data(book)    
+
+        elif command == "edit-note":
+            print(edit_note(args, book))
+            save_data(book)
+
+        elif command == "delete-note":
+            print(delete_note(args, book))
+            save_data(book)
+
+        elif command == "delete-tag":
+            print(delete_tag(args, book))
+            save_data(book)     
 
         else:
             print("Invalid command.")

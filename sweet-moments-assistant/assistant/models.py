@@ -148,6 +148,22 @@ class Record:
 
         return "; ".join(note.value for note in self.notes)
     
+    def edit_note(self, old_text, new_text):
+        for note in self.notes:
+            if note.value.lower() == old_text.lower():
+                note.value = new_text
+                return
+
+        raise ValueError("Note not found.")
+
+    def delete_note(self, text):
+        for note in self.notes:
+            if note.value.lower() == text.lower():
+                self.notes.remove(note)
+                return
+
+        raise ValueError("Note not found.")
+    
     def add_tag(self, tag):
         if not hasattr(self, "tags"):
             self.tags = []
@@ -163,6 +179,13 @@ class Record:
 
         return ", ".join(tag.value for tag in self.tags)
 
+    def delete_tag(self, tag_text):
+        for tag in self.tags:
+            if tag.value.lower() == tag_text.lower():
+                self.tags.remove(tag)
+                return
+
+        raise ValueError("Tag not found.")
 
     def __str__(self):
         phones = "; ".join(p.value for p in self.phones)
