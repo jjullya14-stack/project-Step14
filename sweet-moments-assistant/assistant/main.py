@@ -25,6 +25,7 @@ from assistant.handlers import (
     find_contact,
     find_note,
     find_tag,
+    delete_contact,
 )
 
 
@@ -119,6 +120,10 @@ def main():
 
         elif command == "help":
             show_help()
+
+        elif command == "delete":
+             print(delete_contact(args, book))
+             save_data(book)    
 
         else:
             print("Invalid command.")

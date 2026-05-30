@@ -286,3 +286,11 @@ def find_tag(args, book):
         return "No tags found."
 
     return "\n".join(result)
+
+@input_error
+def delete_contact(args, book):
+    name, *_ = args
+
+    book.delete(name)
+
+    return "Contact deleted."

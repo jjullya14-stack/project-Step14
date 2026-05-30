@@ -36,7 +36,8 @@ def show_main_menu():
             "find-note - search note",
             "find-tag - search tag",
             "exit - save and close",
-        ],
+            "delete - delete client",
+        ]
     )
 
 # Відображення доступних команд
@@ -59,6 +60,7 @@ def show_help():
             "show-occasions [name]",
             "birthdays",
             "help",
-        ],
+            "delete [name]",
+        ]
     )
     
