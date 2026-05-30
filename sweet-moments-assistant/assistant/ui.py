@@ -55,6 +55,10 @@ def show_help():
             "find-tag [tag]",
             "all",
             "exit / close",
+            "add-occasion [name] [event]",
+            "show-occasions [name]",
+            "birthdays",
+            "help",
         ],
     )
     

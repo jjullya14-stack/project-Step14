@@ -82,6 +82,9 @@ class Record:
         self.tags = []
 
     def add_phone(self, phone):
+        if self.find_phone(phone):
+             raise ValueError("Phone already exists.")
+
         self.phones.append(Phone(phone))
 
     def remove_phone(self, phone):
