@@ -28,13 +28,16 @@ def show_main_menu():
             "help - show all commands",
             "add - add new client",
             "all - show all clients",
+            "birthdays - upcoming birthdays",
+            "add-note - add client note",
+            "add-tag - add client tag",
+            "add-occasion - add family event",
             "find-contact - search client",
             "find-note - search note",
             "find-tag - search tag",
             "exit - save and close",
         ],
     )
-
 
 # Відображення доступних команд
 def show_help():
