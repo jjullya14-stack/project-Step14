@@ -1,8 +1,9 @@
 from colorama import Fore, init
 
+# Ініціалізація кольорового виводу в терміналі
 init(autoreset=True)
 
-
+# Створення красивої рамки для CLI
 def print_box(title, lines=None):
     if lines is None:
         lines = []
@@ -19,7 +20,7 @@ def print_box(title, lines=None):
 
     print(Fore.CYAN + "╚" + "═" * width + "╝")
 
-
+# Головне меню застосунку
 def show_main_menu():
     print_box(
         "🎂 SWEET MOMENTS ASSISTANT",
@@ -35,6 +36,7 @@ def show_main_menu():
     )
 
 
+# Відображення доступних команд
 def show_help():
     print_box(
         "📌 AVAILABLE COMMANDS",
