@@ -66,13 +66,17 @@ class AddressBook(UserDict):
 
     # Пошук нотаток за ключовим словом
     def search_notes(self, keyword):
-        result = []
+       result = []
 
-        for record in self.data.values():
-            for note in record.notes:
+       for record in self.data.values():
+           for note in record.notes:
                 if keyword.lower() in note.value.lower():
-                    result.append(str(record))
-                    break
+                   result.append(str(record))
+                   break
+
+       return result
+
+
   
       # Пошук тегів за ключовим словом
     def search_tags(self, keyword):
